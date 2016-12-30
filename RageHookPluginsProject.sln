@@ -3,9 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TheKilla", "HornShouter\TheKilla.csproj", "{ADA9E492-B39A-4DE9-AA55-029404BB878C}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RepairAndWash", "RepairAndWash\RepairAndWash.csproj", "{4C50A474-88DB-486D-B33D-9628EF241294}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RepairAndWash", "..\GtaRagePlugins\RepairAndWash\RepairAndWash.csproj", "{4C50A474-88DB-486D-B33D-9628EF241294}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
