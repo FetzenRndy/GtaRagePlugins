@@ -1,6 +1,5 @@
 ﻿using System;
 using System.IO;
-using System.Reflection;
 using Rage;
 using System.Runtime.InteropServices;
 using System.Text;
@@ -40,9 +39,8 @@ namespace RepairAndWash
 		/// </summary>
 		public static void IniHandler()
 		{
-			InIFile iniHandler = new InIFile();
+			InIFile iniHandler = new InIFile {path = "Plugins/RepairAndWash.ini"};
 
-			iniHandler.path = "Plugins/RepairAndWash.ini";
 
 			if (!File.Exists(iniHandler.path))
 			{
@@ -129,7 +127,7 @@ namespace RepairAndWash
 		}
 
 		/// <summary>
-		/// According to the user wished action eighter clean, repair or Clean and Repair the Car and Wait for another keydown;
+		/// According to the user wished action eighter clean, repair or Clean and Repair the Car and Wait for another key down;
 		/// </summary>
 		public static void OnKeyDown(string Action)
 		{
@@ -187,14 +185,14 @@ namespace RepairAndWash
 
 			public void WriteValue(string Section, string Key, string Value)
 			{
-				WritePrivateProfileString(Section, Key, Value, this.path);
+				WritePrivateProfileString(Section, Key, Value, path);
 			}
 
 			public string ReadValue(string Section, string Key)
 			{
 				StringBuilder temp = new StringBuilder(255);
-				int i = GetPrivateProfileString(Section, Key, "", temp,
-												255, this.path);
+				GetPrivateProfileString(Section, Key, "", temp,
+					255, path);
 				return temp.ToString();
 
 			}

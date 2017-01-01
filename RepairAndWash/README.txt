@@ -23,7 +23,7 @@ Installation:
 -------------------------------------------------------------
 Want to know a bit more about this mod ?
 
-	Then Good news! This Mods is Open source, visit my GitHub at : https://github.com/FetzenRndy/GtaRagePlugins
+	Then Good news! This Mods is Open source, visit my GitHub at : https://github.com/FetzenRndy/RagePlugins
 	If you want to support me, then the best thing you could do is heavely test this Plugin, Report Bugs and Maybe if you know C# contribute.
 	
 -------------------------------------------------------------
