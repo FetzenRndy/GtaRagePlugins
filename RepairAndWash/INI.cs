@@ -1,20 +1,28 @@
-﻿using System;
-using System.IO;
-using System.Runtime.InteropServices;
-using System.Text;
-using System.Windows.Forms;
-using Rage;
-
+﻿// ****************************** Module Header ****************************** //
+//
+// Last Modified: 29:01:2017 / 02:12
+// Creation: 03:01:2017
+// Project: RepairAndWash
+//
+// <copyright file="INI.cs" company="Patrick Hollweck">//</copyright>
+// *************************************************************************** //
 namespace RepairAndWash
 {
-	class INI
+	using System;
+	using System.IO;
+	using System.Runtime.InteropServices;
+	using System.Text;
+	using System.Windows.Forms;
+
+	using Rage;
+
+	internal class INI
 	{
 		public static void IniHandler()
 		{
+			InIFile iniHandler = new InIFile { Path = "Plugins/RepairAndWash.ini" };
 
-			InIFile iniHandler = new InIFile { path = "Plugins/RepairAndWash.ini" };
-
-			if (!File.Exists(iniHandler.path))
+			if (!File.Exists(iniHandler.Path))
 			{
 				iniHandler.WriteValue("KEYBINDINGS", "CleaningAndRepairing", "NumPad0");
 				iniHandler.WriteValue("KEYBINDINGS", "Cleaning", "NumPad1");
@@ -28,103 +36,121 @@ namespace RepairAndWash
 			else
 			{
 				KeysConverter kc = new KeysConverter();
-				string ParserStep = "Not Started";
+				string parserStep = "Not Started";
 
 				try
 				{
-					ParserStep = "CleanAndRepair KEY";
-					object CleanAndRepair = kc.ConvertFromString(iniHandler.ReadValue("KEYBINDINGS", "CleaningAndRepairing"));
-					if (CleanAndRepair != null)
+					parserStep = "CleanAndRepair KEY";
+					object cleanAndRepair = kc.ConvertFromString(iniHandler.ReadValue("KEYBINDINGS", "CleaningAndRepairing"));
+					if (cleanAndRepair != null)
 					{
-						global.KeyCleanAndRepair = (Keys)CleanAndRepair;
+						global.KeyCleanAndRepair = (Keys)cleanAndRepair;
 					}
 
-					ParserStep = "Clean KEY";
-					object Clean = kc.ConvertFromString(iniHandler.ReadValue("KEYBINDINGS", "Cleaning"));
-					if (Clean != null)
+					parserStep = "Clean KEY";
+					object clean = kc.ConvertFromString(iniHandler.ReadValue("KEYBINDINGS", "Cleaning"));
+					if (clean != null)
 					{
-						global.KeyClean = (Keys)Clean;
+						global.KeyClean = (Keys)clean;
 					}
 
-					ParserStep = "Repair KEY";
-					object Repair = kc.ConvertFromString(iniHandler.ReadValue("KEYBINDINGS", "Repairing"));
-					if (Repair != null)
+					parserStep = "Repair KEY";
+					object repair = kc.ConvertFromString(iniHandler.ReadValue("KEYBINDINGS", "Repairing"));
+					if (repair != null)
 					{
-						global.KeyRepair = (Keys)Repair;
+						global.KeyRepair = (Keys)repair;
 					}
 
-					ParserStep = "Notification KEY";
-					string NotificationsReader = iniHandler.ReadValue("SETTINGS", "NOTIFICATIONS");
-					if (NotificationsReader != null)
+					parserStep = "Notification KEY";
+					string notificationsReader = iniHandler.ReadValue("SETTINGS", "NOTIFICATIONS");
+					if (notificationsReader != null)
 					{
-						global.ShowNotifications = Convert.ToBoolean(NotificationsReader);
+						global.ShowNotifications = Convert.ToBoolean(notificationsReader);
 					}
 
-					ParserStep = "Sound Setting";
-					string PlaySoundReader = iniHandler.ReadValue("SETTINGS", "PLAYSOUND");
-					if (PlaySoundReader != null)
+					parserStep = "Sound Setting";
+					string playSoundReader = iniHandler.ReadValue("SETTINGS", "PLAYSOUND");
+					if (playSoundReader != null)
 					{
-						global.PlaySound = Convert.ToBoolean(PlaySoundReader);
+						global.PlaySound = Convert.ToBoolean(playSoundReader);
 					}
 
-					ParserStep = "AutoUpdate Setting";
-					string AutoUpdateReader = iniHandler.ReadValue("SETTINGS", "AUTOUPDATE");
-					if (AutoUpdateReader != null)
+					parserStep = "AutoUpdate Setting";
+					string autoUpdateReader = iniHandler.ReadValue("SETTINGS", "AUTOUPDATE");
+					if (autoUpdateReader != null)
 					{
-						global.AutoUpdate = Convert.ToBoolean(AutoUpdateReader);
+						global.AutoUpdate = Convert.ToBoolean(autoUpdateReader);
 					}
 
-					ParserStep = "NOTIFICATIONTYPE Setting";
-					string NotificationTypeReader = iniHandler.ReadValue("SETTINGS", "NOTIFICATIONTYPE");
-					if (NotificationTypeReader != null)
+					parserStep = "NOTIFICATIONTYPE Setting";
+					string notificationTypeReader = iniHandler.ReadValue("SETTINGS", "NOTIFICATIONTYPE");
+					if (notificationTypeReader != null)
 					{
-						global.NotificationsType = Convert.ToString(NotificationTypeReader);
+						string temp = Convert.ToString(notificationTypeReader);
+
+						if (temp == "top")
+						{
+							global.NotificationsType = global.NotificationType.Help;
+						}
+						else if (temp == "sub")
+						{
+							global.NotificationsType = global.NotificationType.Subtitle;
+						}
+						else if (temp == "radar")
+						{
+							global.NotificationsType = global.NotificationType.Radar;
+						}
 					}
 
-					ParserStep = "WASHPLAYER KEY";
-					object WashPlayerKeyReader = kc.ConvertFromString(iniHandler.ReadValue("KEYBINDINGS", "CleanPlayer"));
-					if (WashPlayerKeyReader != null)
+					parserStep = "WASHPLAYER KEY";
+					object washPlayerKeyReader = kc.ConvertFromString(iniHandler.ReadValue("KEYBINDINGS", "CleanPlayer"));
+					if (washPlayerKeyReader != null)
 					{
-						global.KeyCleanPlayer = (Keys)WashPlayerKeyReader;
+						global.KeyCleanPlayer = (Keys)washPlayerKeyReader;
 					}
 				}
 				catch (Exception err)
 				{
-					Game.DisplaySubtitle("~r~There was an error while Parsing the INI file at the Position: '" + ParserStep + "' Type into the Rage console: 'RAWWriteErrorLog' for a more detailed error Message - I will be stored in the Plugins folder of your GTA installation");
-					Error.newError("INI ERROR", "Error while Parsing the INI -" + ParserStep , err.Message, err.StackTrace);
+					Game.DisplaySubtitle(
+						"~r~There was an error while Parsing the INI file at the Position: '" + parserStep
+						+ "' Type into the Rage console: 'RAWWriteErrorLog' for a more detailed error Message - I will be stored in the Plugins folder of your GTA installation");
+					Error.NewError("INI ERROR", "Error while Parsing the INI -" + parserStep, err.Message, err.StackTrace);
 				}
 			}
 		}
 	}
 
+	// TODO: REPLACE WITH LIBRARY
+
 	/// <summary>
 	/// INI Files handling class
 	/// </summary>
-	class InIFile
+	internal class InIFile
 	{
-		public string path;
+		public string Path { get; set; }
 
-		[DllImport("kernel32")]
-		private static extern long WritePrivateProfileString(string section,
-		string key, string val, string filePath);
-
-		[DllImport("kernel32")]
-		private static extern int GetPrivateProfileString(string section,
-		string key, string def, StringBuilder retVal,
-		int size, string filePath);
-
-		public void WriteValue(string Section, string Key, string Value)
-		{
-			WritePrivateProfileString(Section, Key, Value, path);
-		}
-
-		public string ReadValue(string Section, string Key)
+		public string ReadValue(string section, string key)
 		{
 			StringBuilder temp = new StringBuilder(255);
-			GetPrivateProfileString(Section, Key, "", temp,
-				255, path);
+			GetPrivateProfileString(section, key, string.Empty, temp, 255, this.Path);
 			return temp.ToString();
-
 		}
+
+		public void WriteValue(string section, string key, string value)
+		{
+			WritePrivateProfileString(section, key, value, this.Path);
+		}
+
+		[DllImport("kernel32")]
+		private static extern int GetPrivateProfileString(
+			string section,
+			string key,
+			string def,
+			StringBuilder retVal,
+			int size,
+			string filePath);
+
+		[DllImport("kernel32")]
+		private static extern long WritePrivateProfileString(string section, string key, string val, string filePath);
 	}
 }

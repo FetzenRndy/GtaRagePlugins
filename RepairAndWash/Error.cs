@@ -1,38 +1,54 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using Rage;
-
+﻿// ****************************** Module Header ****************************** //
+//
+// Last Modified: 29:01:2017 / 02:12
+// Creation: 03:01:2017
+// Project: RepairAndWash
+//
+// <copyright file="Error.cs" company="Patrick Hollweck">//</copyright>
+// *************************************************************************** //
 namespace RepairAndWash
 {
-	class Error
+	using System;
+	using System.Collections.Generic;
+	using System.IO;
+
+	using Rage;
+
+	internal class Error
 	{
-		public static int errorCounter = 0;
-		private static List<string> errorList = new List<string>();
+		private static readonly List<string> errorList = new List<string>();
 
-		private static List<string> mainLog = new List<string>();
+		private static readonly List<string> mainLog = new List<string>();
 
-		public static void newError(string ErrorType, string CustomMessage, string errMessage = "none", string StackTrace = "none")
+		public static int errorCounter { get; set; } = 0;
+
+		public static void Log(string sender, string message)
+		{
+			Game.LogTrivialDebug(sender + " -- " + message);
+			mainLog.Add(DateTime.Now + " === " + sender + " -- " + message + "\n");
+		}
+
+		public static void NewError(
+			string errorType,
+			string customMessage,
+			string errMessage = "none",
+			string stackTrace = "none")
 		{
 			errorCounter++;
-			errorList.Add(DateTime.Now + " === " + errorCounter + ": " + ErrorType +" -- " + CustomMessage + " /// " + errMessage + " :: " + StackTrace);
+			errorList.Add(
+				DateTime.Now + " === " + errorCounter + ": " + errorType + " -- " + customMessage + " /// " + errMessage + " :: "
+				+ stackTrace);
 			mainLog.Add("ERROR: " + errorCounter);
 		}
 
-		public static void printErrorList()
+		public static void PrintErrorList()
 		{
-			newError("WRITTER", "WRITING ERRORLOG", "", "");
+			NewError("WRITTER", "WRITING ERRORLOG", string.Empty, string.Empty);
 			File.WriteAllLines("Plugins/RAWErrorlog.txt", errorList);
 			Game.LogTrivial("SUCCESS!");
 		}
 
-		public static void Log(string Sender ,string Message)
-		{
-			Game.LogTrivialDebug(Sender + " -- " + Message);
-			mainLog.Add(DateTime.Now + " === " + Sender + " -- " + Message + "\n");
-		}
-
-		public static void printLog()
+		public static void PrintLog()
 		{
 			File.WriteAllLines("Plugins/RAWlog.txt", mainLog);
 			Game.LogTrivial("SUCCESS!");

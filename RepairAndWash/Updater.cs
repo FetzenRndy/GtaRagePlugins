@@ -1,29 +1,38 @@
-﻿using System;
-using System.IO;
-using System.IO.Compression;
-using System.Net;
-using System.Threading.Tasks;
-using Rage;
-
+﻿// ****************************** Module Header ****************************** //
+//
+// Last Modified: 29:01:2017 / 02:07
+// Creation: 03:01:2017
+// Project: RepairAndWash
+//
+// <copyright file="Updater.cs" company="Patrick Hollweck">//</copyright>
+// *************************************************************************** //
 namespace RepairAndWash
 {
-	//TODO: REWRITE
-	class Updater
-	{
-		public static async void GetVersionAsync()
-		{
-			global.LatestVersion = await new WebClient().DownloadStringTaskAsync("https://raw.githubusercontent.com/FetzenRndy/RagePlugins/master/updater/RAWlatestVersion.txt");
-		}
+	using Rage;
+	using System;
+	using System.IO;
+	using System.IO.Compression;
+	using System.Net;
+	using System.Threading.Tasks;
 
+	// TODO: REWRITE
+	internal class Updater
+	{
 		public static async Task<bool> DownloadUpdate()
 		{
-			await new WebClient().DownloadFileTaskAsync
-			(
-				new Uri("https://github.com/FetzenRndy/RagePlugins/blob/master/RepairAndWash/Releases/" + global.LatestVersion + ".rar?raw=true"),
-				"Plugins/RAWUpdate" + global.LatestVersion + ".rar"
-			);
+			await new WebClient().DownloadFileTaskAsync(
+				new Uri(
+					"https://github.com/FetzenRndy/RagePlugins/blob/master/RepairAndWash/Releases/" + global.LatestVersion + ".rar?raw=true"),
+				"Plugins/RAWUpdate" + global.LatestVersion + ".rar");
 
 			return true;
+		}
+
+		public static async void GetVersionAsync()
+		{
+			global.LatestVersion =
+				await new WebClient().DownloadStringTaskAsync(
+					"https://raw.githubusercontent.com/FetzenRndy/RagePlugins/master/updater/RAWlatestVersion.txt");
 		}
 
 		/// <summary>
@@ -35,7 +44,7 @@ namespace RepairAndWash
 			{
 				WebClient wc = new WebClient();
 
-				if (global.LatestVersion != "")
+				if (global.LatestVersion != string.Empty)
 				{
 					if (global.LatestVersion != global.CurrentVersion)
 					{
@@ -44,39 +53,39 @@ namespace RepairAndWash
 
 					if (global.AutoUpdate)
 					{
-						//TODO TEST
+						// TODO TEST
 						DownloadUpdate().Start();
 						Game.DisplayNotification("~g~DOWNLOADING...");
 
 						wc.DownloadFileCompleted += (sender, e) =>
-						{
-							Game.DisplayNotification("Download Completed");
+							{
+								Game.DisplayNotification("Download Completed");
 
-							try
-							{
-								//TODO: Rethink...
-								File.Delete("Plugins/RepairAndWash.ini");
-								File.Delete("Plugins/RepairAndWash.dll");
-								ZipFile.ExtractToDirectory("Plugins/RAWUpdate" + global.LatestVersion + ".rar", "Plugins/");
-								Game.DisplayNotification("~g~Update Completed!");
-								File.Delete("Plugins/RAWUpdate" + global.LatestVersion + ".rar");
-								Game.DisplayNotification("~y~PLEASE RESTART YOUR GAME!");
-							}
-							catch (Exception err)
-							{
-								//global.errorList.Add("UPDATE ERROR: ZIP: " + err.Message + "        " + err.StackTrace);
-								Game.DisplayNotification("~r~ERROR While extracting the .rar! Please manually extract it  and Restart the Game");
-							}
-						};
+								try
+								{
+									// TODO: Rethink...
+									File.Delete("Plugins/RepairAndWash.ini");
+									File.Delete("Plugins/RepairAndWash.dll");
+									ZipFile.ExtractToDirectory("Plugins/RAWUpdate" + global.LatestVersion + ".rar", "Plugins/");
+									Game.DisplayNotification("~g~Update Completed!");
+									File.Delete("Plugins/RAWUpdate" + global.LatestVersion + ".rar");
+									Game.DisplayNotification("~y~PLEASE RESTART YOUR GAME!");
+								}
+								catch (Exception)
+								{
+									// global.errorList.Add("UPDATE ERROR: ZIP: " + err.Message + "        " + err.StackTrace);
+									Game.DisplayNotification("~r~ERROR While extracting the .rar! Please manually extract it  and Restart the Game");
+								}
+							};
 					}
 				}
 			}
-			catch (Exception err)
+			catch (Exception)
 			{
-				global.errors++;
-				//global.errorList.Add("Updater ERROR: " + err.Message + "      " + err.StackTrace);
-			}
+				global.Errors++;
 
+				// global.errorList.Add("Updater ERROR: " + err.Message + "      " + err.StackTrace);
+			}
 		}
 	}
 }
