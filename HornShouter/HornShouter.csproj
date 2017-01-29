@@ -16,7 +16,7 @@
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>..\..\..\..\..\..\Games\Steam Games\steamapps\common\Grand Theft Auto V\plugins\LSPDFR\</OutputPath>
+    <OutputPath>..\..\..\..\..\..\Games\Steam Games\steamapps\common\Grand Theft Auto V\plugins\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>

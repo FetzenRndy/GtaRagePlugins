@@ -1,42 +1,66 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Runtime.InteropServices;
 using System.Text;
-using System.Threading.Tasks;
 using Rage;
-using LSPD_First_Response.Mod.API;
+
+[assembly: Rage.Attributes.Plugin("HornShouter", Description = "Let's your Police Car make the 'POLICE STOP' sound", Author = "Patrick Hollweck")]
+
+/*
+ * Developed by Patrick Hollweck - GitHub: https://github.com/FetzenRndy;
+ * This Plugin will make your Police car be able to shout the Police spcific sounds like "POLICE STOP" , "STOP YOUR VEHICLE" while in Pursuit.
+ */
+
+
 
 namespace HornShouter
 {
-    public class Main : Plugin
-    {
-		public override void Initialize()
+	public class EntryPoint
+	{
+		public static void Main()
 		{
-			Functions.OnOnDutyStateChanged += OnOnDutyStateChangedHandler;
+			StartPlugin();
+			Game.DisplayNotification("~b~Horn Shouter ~w~ Has been loaded ~g~Successfully.");
+		}
 
-			for (int i = 0; i < 20; i++)
+		public static void StartPlugin()
+		{
+			while (true)
 			{
-				Game.LogTrivial("HORN SHOUTER LOADED!!! " + System.Reflection.Assembly.GetExecutingAssembly().GetName().Version + " has been initialized.");
+				
 			}
 		}
 
-		public override void Finally()
-		{
-			//Cleanup!
-			Game.LogTrivial("LSPDFR_API_Guide has been cleaned up.");
-		}
 
-		private static void OnOnDutyStateChangedHandler(bool OnDuty)
+
+
+		/// <summary>
+		/// INI Files handling class
+		/// </summary>
+		class InIFile
 		{
-			if (OnDuty)
+			public string path;
+
+			[DllImport("kernel32")]
+			private static extern long WritePrivateProfileString(string section,
+			string key, string val, string filePath);
+
+			[DllImport("kernel32")]
+			private static extern int GetPrivateProfileString(string section,
+			string key, string def, StringBuilder retVal,
+			int size, string filePath);
+
+			public void WriteValue(string Section, string Key, string Value)
 			{
-				StartHornShouter();
+				WritePrivateProfileString(Section, Key, Value, path);
 			}
-		}
 
-		private static void StartHornShouter()
-		{
-			Functions.PlayScannerAudio("LOL.mp3");
+			public string ReadValue(string Section, string Key)
+			{
+				StringBuilder temp = new StringBuilder(255);
+				GetPrivateProfileString(Section, Key, "", temp,
+					255, path);
+				return temp.ToString();
+
+			}
 		}
 	}
 }
