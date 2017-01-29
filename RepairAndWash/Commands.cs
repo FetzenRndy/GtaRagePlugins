@@ -19,7 +19,7 @@ namespace RepairAndWash
 		[ConsoleCommand]
 		public static void RAWReloadIni()
 		{
-			INI.IniHandler();
+			Config.IniHandler();
 			Game.DisplayNotification("~g~RELOADED RAW's INI FILE");
 		}
 

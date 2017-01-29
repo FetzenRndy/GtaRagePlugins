@@ -20,7 +20,7 @@ namespace RepairAndWash
 		public static void Main()
 		{
 			Audio.Setup();
-			INI.IniHandler();
+			Config.IniHandler();
 			StartPlugin();
 
 			Game.DisplayNotification("~b~RepairAndWash ~w~V" + global.CurrentVersion + " Has been loaded ~g~Successfully.");
