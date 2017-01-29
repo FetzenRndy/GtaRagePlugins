@@ -1,19 +1,21 @@
 ﻿// ****************************** Module Header ****************************** //
 //
-// Last Modified: 29:01:2017 / 02:07
+// Last Modified: 29:01:2017 / 16:09
 // Creation: 03:01:2017
 // Project: RepairAndWash
 //
-// <copyright file="Updater.cs" company="Patrick Hollweck">//</copyright>
+// <copyright file="Updater.cs" company="Patrick Hollweck" GitHub="https://github.com/FetzenRndy">//</copyright>
 // *************************************************************************** //
+
 namespace RepairAndWash
 {
-	using Rage;
 	using System;
 	using System.IO;
 	using System.IO.Compression;
 	using System.Net;
 	using System.Threading.Tasks;
+
+	using Rage;
 
 	// TODO: REWRITE
 	internal class Updater

@@ -1,11 +1,12 @@
 ﻿// ****************************** Module Header ****************************** //
 //
-// Last Modified: 29:01:2017 / 02:12
+// Last Modified: 29:01:2017 / 16:09
 // Creation: 03:01:2017
 // Project: RepairAndWash
 //
-// <copyright file="INI.cs" company="Patrick Hollweck">//</copyright>
+// <copyright file="INI.cs" company="Patrick Hollweck" GitHub="https://github.com/FetzenRndy">//</copyright>
 // *************************************************************************** //
+
 namespace RepairAndWash
 {
 	using System;
@@ -13,8 +14,6 @@ namespace RepairAndWash
 	using System.Runtime.InteropServices;
 	using System.Text;
 	using System.Windows.Forms;
-
-	using Rage;
 
 	internal class INI
 	{
@@ -72,7 +71,7 @@ namespace RepairAndWash
 					string playSoundReader = iniHandler.ReadValue("SETTINGS", "PLAYSOUND");
 					if (playSoundReader != null)
 					{
-						global.PlaySound = Convert.ToBoolean(playSoundReader);
+						global.isAudioEnables = Convert.ToBoolean(playSoundReader);
 					}
 
 					parserStep = "AutoUpdate Setting";
@@ -109,12 +108,8 @@ namespace RepairAndWash
 						global.KeyCleanPlayer = (Keys)washPlayerKeyReader;
 					}
 				}
-				catch (Exception err)
+				catch (Exception)
 				{
-					Game.DisplaySubtitle(
-						"~r~There was an error while Parsing the INI file at the Position: '" + parserStep
-						+ "' Type into the Rage console: 'RAWWriteErrorLog' for a more detailed error Message - I will be stored in the Plugins folder of your GTA installation");
-					Error.NewError("INI ERROR", "Error while Parsing the INI -" + parserStep, err.Message, err.StackTrace);
 				}
 			}
 		}

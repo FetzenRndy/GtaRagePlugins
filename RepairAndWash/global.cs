@@ -52,7 +52,7 @@ namespace RepairAndWash
 
 		public static NotificationType NotificationsType { get; set; }
 
-		public static bool PlaySound { get; set; }
+		public static bool isAudioEnables { get; set; }
 
 		public static SoundPlayer RepairSound { get; set; }
 

@@ -17,7 +17,7 @@ namespace RepairAndWash
 		/// Console Command Reload Plugin
 		/// </summary>
 		[ConsoleCommand]
-		public static void RAWReloadINI()
+		public static void RAWReloadIni()
 		{
 			INI.IniHandler();
 			Game.DisplayNotification("~g~RELOADED RAW's INI FILE");
@@ -29,7 +29,7 @@ namespace RepairAndWash
 		[ConsoleCommand]
 		public static void RAWWriteErrorList()
 		{
-			Error.PrintErrorList();
+			//Error.PrintErrorList();
 		}
 
 		/// <summary>
@@ -38,7 +38,7 @@ namespace RepairAndWash
 		[ConsoleCommand]
 		public static void RAWWriteLog()
 		{
-			Error.PrintLog();
+			//Error.PrintLog();
 		}
 
 		[ConsoleCommand]
