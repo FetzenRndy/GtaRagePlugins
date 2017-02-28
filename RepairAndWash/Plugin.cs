@@ -1,8 +1,10 @@
 ﻿// ****************************** Module Header ****************************** //
 //
-// Last Modified: 29:01:2017 / 16:07
-// Creation: 01:01:2017
+//
+// Last Modified: 28:02:2017 / 17:33
+// Creation: 28:02:2017
 // Project: RepairAndWash
+//
 //
 // <copyright file="Plugin.cs" company="Patrick Hollweck" GitHub="https://github.com/FetzenRndy">//</copyright>
 // *************************************************************************** //
@@ -14,16 +16,21 @@ using Rage.Attributes;
 namespace RepairAndWash
 {
 	using Rage;
+	using Rage.Forms;
 
-	public class Plugin
+	using RepairAndWash.Core.Common;
+	using RepairAndWash.Core.Components;
+
+	public static class Plugin
 	{
 		public static void Main()
 		{
+			Config.Setup();
 			Audio.Setup();
-			Config.IniHandler();
+			Updater.CheckUpdate();
 			StartPlugin();
 
-			Game.DisplayNotification("~b~RepairAndWash ~w~V" + global.CurrentVersion + " Has been loaded ~g~Successfully.");
+			Game.DisplayNotification("~b~RepairAndWash ~w~V" + Global.Application.CurrentVersion + " Has been loaded ~g~Successfully.");
 		}
 
 		/// <summary>Executes a Action based on KeyPress</summary>
@@ -35,68 +42,46 @@ namespace RepairAndWash
 
 			if (playerVehicle != null)
 			{
-				string playerVehicleType = Util.GetVehicleType(playerVehicle);
+				return;
+			}
 
-				// Actions
-				if (Action == "RepairAndClean")
-				{
-					if (global.isAudioEnables)
-					{
-						global.RepairSound.Play();
-					}
+			string playerVehicleType = Util.GetVehicleType(playerVehicle);
 
-					playerVehicle.Repair();
-					playerVehicle.Wash();
+			// Actions
+			if (Action == "RepairAndClean")
+			{
+				Audio.PlaySound(Global.Sound.Sounds.RepairAndWash);
 
-					if (global.ShowNotifications)
-					{
-						Util.DisplayNotificationType(global.NotificationsType, "~g~Repaired and cleaned your " + playerVehicleType + "!");
-					}
-				}
-				else if (Action == "Repair")
-				{
-					if (global.isAudioEnables)
-					{
-						global.RepairSound.Play();
-					}
+				playerVehicle.Repair();
+				playerVehicle.Wash();
 
-					playerVehicle.Repair();
+				Util.DisplayNotificationType("~g~Repaired and cleaned your " + playerVehicleType + "!");
+			}
+			else if (Action == "Repair")
+			{
+				Audio.PlaySound(Global.Sound.Sounds.Repair);
 
-					if (global.ShowNotifications)
-					{
-						Util.DisplayNotificationType(global.NotificationsType, "~g~Repaired your vehicle " + playerVehicleType + "!");
-					}
-				}
-				else if (Action == "Clean")
-				{
-					if (global.isAudioEnables)
-					{
-						global.WashSound.Play();
-					}
+				playerVehicle.Repair();
 
-					playerVehicle.Wash();
+				Util.DisplayNotificationType("~g~Repaired your vehicle " + playerVehicleType + "!");
+			}
+			else if (Action == "Clean")
+			{
+				Audio.PlaySound(Global.Sound.Sounds.Wash);
 
-					if (global.ShowNotifications)
-					{
-						Util.DisplayNotificationType(global.NotificationsType, "~g~Cleaned your vehicle " + playerVehicleType + "!");
-					}
-				}
+				playerVehicle.Wash();
+
+				Util.DisplayNotificationType("~g~Cleaned your vehicle " + playerVehicleType + "!");
+			}
+			else if (Action == "WashPlayer")
+			{
+				Util.DisplayNotificationType("~r~Washed Player...");
+
+				// TODO: PlayerWashing
 			}
 			else
 			{
-				if (global.ShowNotifications)
-				{
-					Util.DisplayNotificationType(global.NotificationsType, "~r~You are not in a Vehicle...");
-				}
-			}
-
-			if (Action == "WashPlayer")
-			{
-				Util.DisplayNotificationType(global.NotificationsType, "~r~Washed Player...");
-				player.Clone();
-				player.Delete();
-
-				// player = new Ped(player.Model,player.Position, player.Heading);
+				Util.DisplayNotificationType("~r~You are not in a Vehicle...");
 			}
 
 			WaitForKeydown();
@@ -108,10 +93,7 @@ namespace RepairAndWash
 		private static void StartPlugin()
 		{
 			GameFiber.StartNew(
-				delegate
-					{
-						WaitForKeydown();
-					});
+				delegate { WaitForKeydown(); });
 		}
 
 		/// <summary>
@@ -119,33 +101,39 @@ namespace RepairAndWash
 		/// </summary>
 		private static void WaitForKeydown()
 		{
+			GwenForm form = new GwenForm(typeof(Forms.SettingsForm));
+
+			form.InitializeLayout();
+			form.Show();
+
 			while (true)
 			{
 				GameFiber.Yield();
 
-				if (Game.IsKeyDown(global.KeyCleanAndRepair))
-				{
-					OnKeyDown("RepairAndClean");
-					break;
-				}
+				/*				if (Game.IsKeyDown(Global.KeyCleanAndRepair))
+												{
+													OnKeyDown("RepairAndClean");
+													break;
+												}
 
-				if (Game.IsKeyDown(global.KeyClean))
-				{
-					OnKeyDown("Clean");
-					break;
-				}
+												if (Game.IsKeyDown(Global.KeyClean))
+												{
+													OnKeyDown("Clean");
+													break;
+												}
 
-				if (Game.IsKeyDown(global.KeyRepair))
-				{
-					OnKeyDown("Repair");
-					break;
-				}
+												if (Game.IsKeyDown(Global.KeyRepair))
+												{
+													OnKeyDown("Repair");
+													break;
+												}
 
-				if (Game.IsKeyDown(global.KeyCleanPlayer))
-				{
-					OnKeyDown("WashPlayer");
-					break;
-				}
+												if (Game.IsKeyDown(Global.KeyCleanPlayer))
+												{
+													OnKeyDown("WashPlayer");
+													break;
+												}
+								*/
 			}
 		}
 	}

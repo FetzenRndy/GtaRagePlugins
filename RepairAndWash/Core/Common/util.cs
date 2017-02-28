@@ -1,8 +1,10 @@
 ﻿// ****************************** Module Header ****************************** //
 //
-// Last Modified: 29:01:2017 / 15:49
-// Creation: 29:01:2017
+//
+// Last Modified: 28:02:2017 / 15:15
+// Creation: 28:02:2017
 // Project: RepairAndWash
+//
 //
 // <copyright file="util.cs" company="Patrick Hollweck" GitHub="https://github.com/FetzenRndy">//</copyright>
 // *************************************************************************** //
@@ -11,36 +13,38 @@ namespace RepairAndWash
 {
 	using Rage;
 
+	using RepairAndWash.Core.Common;
+
 	internal class Util
 	{
 		/// <summary>
 		/// Displays a Notifications depending on the INI files configuration.
 		/// </summary>
-		/// <param name="type">Type of Notification</param>
 		/// <param name="message">Message you want to Display</param>
-		public static void DisplayNotificationType(global.NotificationType type, string message)
+		public static void DisplayNotificationType(string message)
 		{
-			retry:
-
-			if (global.ShowNotifications)
+			if (!Global.Settings.IsNotificationEnabled)
 			{
-				if (type == global.NotificationType.Help)
-				{
+				return;
+			}
+
+			switch (Global.Settings.PreferedNotificationType)
+			{
+				case Global.Settings.NotificationType.Help:
 					Game.DisplayHelp(message);
-				}
-				else if (type == global.NotificationType.Radar)
-				{
+					break;
+
+				case Global.Settings.NotificationType.Radar:
 					Game.DisplayNotification(message);
-				}
-				else if (type == global.NotificationType.Subtitle)
-				{
+					break;
+
+				case Global.Settings.NotificationType.Subtitle:
 					Game.DisplaySubtitle(message);
-				}
-				else
-				{
-					type = global.NotificationType.Help;
-					goto retry;
-				}
+					break;
+
+				default:
+					Game.DisplayHelp($"{message} \n - There was no Notification Type set -> Using Default!");
+					break;
 			}
 		}
 
@@ -53,7 +57,6 @@ namespace RepairAndWash
 		{
 			string playerVehicleType;
 
-			// Get Type of the Vehicle.
 			if (playerVehicle.IsBicycle)
 			{
 				playerVehicleType = "Bicycle";
