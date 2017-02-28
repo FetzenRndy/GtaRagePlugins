@@ -1,7 +1,7 @@
 ﻿// ****************************** Module Header ****************************** //
 //
 //
-// Last Modified: 28:02:2017 / 15:34
+// Last Modified: 28:02:2017 / 23:34
 // Creation: 28:02:2017
 // Project: RepairAndWash
 //
@@ -9,7 +9,7 @@
 // <copyright file="Updater.cs" company="Patrick Hollweck" GitHub="https://github.com/FetzenRndy">//</copyright>
 // *************************************************************************** //
 
-namespace RepairAndWash
+namespace RepairAndWash.Core.Components
 {
 	using System;
 	using System.Net;
@@ -18,7 +18,7 @@ namespace RepairAndWash
 
 	internal static class Updater
 	{
-		public static WebClient web = new WebClient();
+		private static readonly WebClient Web = new WebClient();
 
 		public static void CheckUpdate()
 		{
@@ -26,17 +26,19 @@ namespace RepairAndWash
 
 			try
 			{
-				response = web.DownloadStringTaskAsync(new Uri("https://raw.githubusercontent.com/FetzenRndy/RagePlugins/master/updater/RAWlatestVersion.txt")).Result;
+				response = Web.DownloadStringTaskAsync(new Uri("https://raw.githubusercontent.com/FetzenRndy/RagePlugins/master/updater/RAWlatestVersion.txt")).Result;
 			}
 			catch (Exception)
 			{
-				// TODO : ErrorHandling
+				// TODO : ErrorHandling in Updater
 			}
 
 			if (string.IsNullOrWhiteSpace(response))
 			{
+				return;
 			}
-			else if (float.TryParse(response, out float result))
+
+			if (float.TryParse(response, out float result))
 			{
 				Global.Application.LatestVersion = result;
 			}

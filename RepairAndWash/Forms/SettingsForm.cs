@@ -1,7 +1,7 @@
 ﻿// ****************************** Module Header ****************************** //
 //
 //
-// Last Modified: 28:02:2017 / 17:38
+// Last Modified: 28:02:2017 / 23:27
 // Creation: 28:02:2017
 // Project: RepairAndWash
 //
@@ -11,26 +11,13 @@
 
 namespace RepairAndWash.Forms
 {
-	using System;
 	using System.Windows.Forms;
-
-	using Rage;
 
 	public partial class SettingsForm : Form
 	{
 		public SettingsForm()
 		{
 			InitializeComponent();
-		}
-
-		private void button1_Click(object sender, EventArgs e)
-		{
-			Game.LogTrivial("CLICK!!!");
-		}
-
-		private void label37_Click(object sender, EventArgs e)
-		{
-
 		}
 	}
 }

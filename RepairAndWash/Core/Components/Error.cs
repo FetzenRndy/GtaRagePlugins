@@ -1,7 +1,7 @@
 ﻿// ****************************** Module Header ****************************** //
 //
 //
-// Last Modified: 28:02:2017 / 15:20
+// Last Modified: 28:02:2017 / 23:34
 // Creation: 28:02:2017
 // Project: RepairAndWash
 //
@@ -13,6 +13,6 @@ namespace RepairAndWash.Core.Components
 {
 	internal class Error
 	{
-		// TODO: Error Handling
+		// TODO: Error Handling class
 	}
 }

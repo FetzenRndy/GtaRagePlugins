@@ -1,7 +1,7 @@
 ﻿// ****************************** Module Header ****************************** //
 //
 //
-// Last Modified: 28:02:2017 / 15:21
+// Last Modified: 01:03:2017 / 00:07
 // Creation: 28:02:2017
 // Project: RepairAndWash
 //
@@ -12,9 +12,20 @@
 namespace RepairAndWash.Core.Common
 {
 	using System.Media;
+	using System.Windows.Forms;
 
 	internal static class Global
 	{
+		public static class Enums
+		{
+			public enum Action
+			{
+				Repair,
+				Wash,
+				RepairAndWash
+			}
+		}
+
 		public static class Application
 		{
 			public static float CurrentVersion { get; set; }
@@ -22,8 +33,11 @@ namespace RepairAndWash.Core.Common
 			public static bool IsFirstStart { get; set; }
 		}
 
-		public static class Keys
+		public static class Controls
 		{
+			public static Keys RepairAndWash { get; set; }
+			public static Keys Wash { get; set; }
+			public static Keys Repair { get; set; }
 		}
 
 		public static class Settings

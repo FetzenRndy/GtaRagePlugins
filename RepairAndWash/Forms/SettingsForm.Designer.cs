@@ -99,16 +99,15 @@
 			this.button1.TabIndex = 0;
 			this.button1.Text = "Confirm";
 			this.button1.UseVisualStyleBackColor = true;
-			this.button1.Click += new System.EventHandler(this.button1_Click);
 			// 
 			// label1
 			// 
 			this.label1.AutoSize = true;
-			this.label1.Font = new System.Drawing.Font("Consolas", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel, ((byte)(0)));
+			this.label1.Font = new System.Drawing.Font("Consolas", 17F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel, ((byte)(0)));
 			this.label1.Location = new System.Drawing.Point(10, 6);
 			this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
 			this.label1.Name = "label1";
-			this.label1.Size = new System.Drawing.Size(360, 18);
+			this.label1.Size = new System.Drawing.Size(405, 20);
 			this.label1.TabIndex = 7;
 			this.label1.Text = "Welcome to the Reapair and Wash Configurator";
 			// 
