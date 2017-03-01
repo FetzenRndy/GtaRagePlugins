@@ -7,6 +7,9 @@
 *.userosscache
 *.sln.docstates
 
+# Custom Ignores for Privacy
+/Dependencies
+
 #Build Results
 [Oo]bj/
 
