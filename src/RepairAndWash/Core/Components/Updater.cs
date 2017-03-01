@@ -1,8 +1,8 @@
 ﻿// ****************************** Module Header ****************************** //
 //
 //
-// Last Modified: 28:02:2017 / 23:34
-// Creation: 28:02:2017
+// Last Modified: 01:03:2017 / 01:20
+// Creation: ::
 // Project: RepairAndWash
 //
 //
@@ -11,19 +11,25 @@
 
 namespace RepairAndWash.Core.Components
 {
+	using RepairAndWash.Core.Common;
 	using System;
 	using System.Net;
 
-	using RepairAndWash.Core.Common;
-
+	/// <summary>
+	/// Class handling Updates and Downloading Potential Updates
+	/// </summary>
 	internal static class Updater
 	{
 		private static readonly WebClient Web = new WebClient();
 
+		/// <summary>
+		/// Checks for a Update by Downloading the LatestVersion from a maintained GitHub file
+		/// </summary>
 		public static void CheckUpdate()
 		{
-			string response = string.Empty;
+			string response = null;
 
+			// Try to get the LatestVersion from a Git file
 			try
 			{
 				response = Web.DownloadStringTaskAsync(new Uri("https://raw.githubusercontent.com/FetzenRndy/RagePlugins/master/updater/RAWlatestVersion.txt")).Result;
@@ -33,11 +39,13 @@ namespace RepairAndWash.Core.Components
 				// TODO : ErrorHandling in Updater
 			}
 
+			// If the Response if NULL or empty the Download wasnt successfull -> Return
 			if (string.IsNullOrWhiteSpace(response))
 			{
 				return;
 			}
 
+			// If the Plugin came so far the download was successfull and the Response can be parsed into a Float
 			if (float.TryParse(response, out float result))
 			{
 				Global.Application.LatestVersion = result;

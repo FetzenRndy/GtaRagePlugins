@@ -11,7 +11,10 @@
 
 namespace RepairAndWash.Core.Components
 {
-	internal class Error
+	/// <summary>
+	/// Class to Handle errors and Logging // Possible Rename in the Future
+	/// </summary>
+	public class Error
 	{
 		// TODO: Error Handling class
 	}

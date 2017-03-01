@@ -9,13 +9,14 @@
 // <copyright file="util.cs" company="Patrick Hollweck" GitHub="https://github.com/FetzenRndy">//</copyright>
 // *************************************************************************** //
 
-namespace RepairAndWash
+namespace RepairAndWash.Core.Common
 {
 	using Rage;
 
-	using RepairAndWash.Core.Common;
-
-	internal class Util
+	/// <summary>
+	/// Util class with Helper Methodes
+	/// </summary>
+	internal static class Util
 	{
 		/// <summary>
 		/// Displays a Notifications depending on the INI files configuration.
@@ -23,11 +24,13 @@ namespace RepairAndWash
 		/// <param name="message">Message you want to Display</param>
 		public static void DisplayNotificationType(string message)
 		{
+			// If the Notifications are Disabled via the INI return
 			if (!Global.Settings.IsNotificationEnabled)
 			{
 				return;
 			}
 
+			// Find out about the PreferedNotificationType set in the INI and Display a Notification with its Type
 			switch (Global.Settings.PreferedNotificationType)
 			{
 				case Global.Settings.NotificationType.Help:
@@ -55,62 +58,59 @@ namespace RepairAndWash
 		/// <returns>Vehicle type as string</returns>
 		public static string GetVehicleType(Vehicle playerVehicle)
 		{
-			string playerVehicleType;
-
+			// Cycle over all Possible VehicleTypes provided by Rage and return it.
 			if (playerVehicle.IsBicycle)
 			{
-				playerVehicleType = "Bicycle";
+				return "Bicycle";
 			}
 			else if (playerVehicle.IsPoliceVehicle)
 			{
-				playerVehicleType = "Police Vehicle";
+				return "Police Vehicle";
 			}
 			else if (playerVehicle.IsBig)
 			{
-				playerVehicleType = "Truck / Bus / Plane";
+				return "Truck / Bus / Plane";
 			}
 			else if (playerVehicle.IsBike)
 			{
-				playerVehicleType = "Bike";
+				return "Bike";
 			}
 			else if (playerVehicle.IsBlimp)
 			{
-				playerVehicleType = "Blimp";
+				return "Blimp";
 			}
 			else if (playerVehicle.IsBoat)
 			{
-				playerVehicleType = "Boat";
+				return "Boat";
 			}
 			else if (playerVehicle.IsCar)
 			{
-				playerVehicleType = "Car";
+				return "Car";
 			}
 			else if (playerVehicle.IsHelicopter)
 			{
-				playerVehicleType = "Helicopter";
+				return "Helicopter";
 			}
 			else if (playerVehicle.IsPlane)
 			{
-				playerVehicleType = "Plane";
+				return "Plane";
 			}
 			else if (playerVehicle.IsQuadBike)
 			{
-				playerVehicleType = "QuadBike";
+				return "QuadBike";
 			}
 			else if (playerVehicle.IsSubmarine)
 			{
-				playerVehicleType = "Submarine";
+				return "Submarine";
 			}
 			else if (playerVehicle.IsTrain)
 			{
-				playerVehicleType = "Train";
+				return "Train";
 			}
 			else
 			{
-				playerVehicleType = "Vehicle";
+				return "Vehicle";
 			}
-
-			return playerVehicleType;
 		}
 	}
 }

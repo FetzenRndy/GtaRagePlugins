@@ -40,7 +40,7 @@
       <HintPath>..\packages\ini-parser.2.3.0\lib\net20\INIFileParser.dll</HintPath>
     </Reference>
     <Reference Include="RagePluginHookSDK">
-      <HintPath>E:\Patrick\Documents\Programming\Projects\CSharp\lib\sRagePluginHookSDK.dll</HintPath>
+      <HintPath>..\..\lib\RagePluginHookSDK.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -56,7 +56,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Core\Components\Audio.cs" />
+    <Compile Include="..\src\RepairAndWash\Core\Components\Audio.cs">
+      <Link>Core\Components\Audio.cs</Link>
+    </Compile>
     <Compile Include="Core\Components\Commands.cs" />
     <Compile Include="Core\Components\Config.cs" />
     <Compile Include="Forms\SettingsForm.cs">
@@ -66,11 +68,19 @@
       <DependentUpon>SettingsForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Plugin.cs" />
-    <Compile Include="Core\Components\Error.cs" />
-    <Compile Include="Core\Common\global.cs" />
+    <Compile Include="..\src\RepairAndWash\Core\Components\Error.cs">
+      <Link>Core\Components\Error.cs</Link>
+    </Compile>
+    <Compile Include="..\src\RepairAndWash\Core\Common\global.cs">
+      <Link>Core\Common\global.cs</Link>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Core\Components\Updater.cs" />
-    <Compile Include="Core\Common\util.cs" />
+    <Compile Include="..\src\RepairAndWash\Core\Components\Updater.cs">
+      <Link>Core\Components\Updater.cs</Link>
+    </Compile>
+    <Compile Include="..\src\RepairAndWash\Core\Common\util.cs">
+      <Link>Core\Common\util.cs</Link>
+    </Compile>
     <Compile Include="Properties\Settings.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>

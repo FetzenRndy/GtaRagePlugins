@@ -11,13 +11,18 @@
 
 namespace RepairAndWash.Core.Components
 {
+	using RepairAndWash.Core.Common;
 	using System;
 	using System.Media;
 
-	using RepairAndWash.Core.Common;
-
+	/// <summary>
+	/// Class Handling Audio Output
+	/// </summary>
 	internal static class Audio
 	{
+		/// <summary>
+		/// Try's to set up the AudioPlayers for the various Sounds
+		/// </summary>
 		public static void Setup()
 		{
 			try
@@ -31,8 +36,13 @@ namespace RepairAndWash.Core.Components
 			}
 		}
 
+		/// <summary>
+		/// Try's to Play a given Sound if not Disabled via the INI
+		/// </summary>
+		/// <param name="sound">Sound that Should be Played</param>
 		public static void PlaySound(Global.Sound.Sounds sound)
 		{
+			// If its Disabled in the INI return and Play no Sound
 			if (!Global.Settings.IsAudioEnabled)
 			{
 				return;
@@ -40,6 +50,7 @@ namespace RepairAndWash.Core.Components
 
 			try
 			{
+				// Try to play The sound given in the Argument via the SoundPlayers from Global.Sound
 				switch (sound)
 				{
 					case Global.Sound.Sounds.Repair:
