@@ -9,6 +9,7 @@
 
 # Custom Ignores for Privacy
 /Dependencies
+/sdk/RagePluginHookSDK.*
 
 #Build Results
 [Oo]bj/
