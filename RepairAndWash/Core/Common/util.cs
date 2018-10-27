@@ -24,26 +24,7 @@ namespace RepairAndWash.Core.Common
 		/// <param name="message">Message you want to Display</param>
 		public static void DisplayNotification(string message)
 		{
-			if (!Global.Settings.NotificationsEnabled)
-			{
-				return;
-			}
-
-			switch (Global.Settings.PreferedNotificationType)
-			{
-				case Global.Settings.NotificationType.Help:
-					Game.DisplayHelp(message);
-					break;
-				case Global.Settings.NotificationType.Radar:
-					Game.DisplayNotification(message);
-					break;
-				case Global.Settings.NotificationType.Subtitle:
-					Game.DisplaySubtitle(message);
-					break;
-				default:
-					Game.DisplayHelp($"{message} \n - There was no Notification Type set -> Using Default!");
-					break;
-			}
+			Game.DisplayNotification(message);
 		}
 
 		/// <summary>

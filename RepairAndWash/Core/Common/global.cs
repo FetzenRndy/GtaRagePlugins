@@ -15,6 +15,8 @@ namespace RepairAndWash.Core.Common
 
 	internal static class Global
 	{
+		// TODO: Take the Global.Enums.Action enum out and refactor commands into seperate module.
+
 		/// <summary>
 		/// Enumberations used in the Plugin
 		/// </summary>
@@ -74,46 +76,6 @@ namespace RepairAndWash.Core.Common
 			/// Key for the Repair Action
 			/// </summary>
 			public static Keys Repair { get; set; }
-		}
-
-		/// <summary>
-		/// All the Settings for the Userdefined Settings for the Plugin
-		/// </summary>
-		public static class Settings
-		{
-			/// <summary>
-			/// Enum with all Possible Notification Types
-			/// </summary>
-			public enum NotificationType
-			{
-				/// <summary>
-				/// The Help Notifications is positioned in the Top right Cornor of the Screen
-				/// </summary>
-				Help,
-
-				/// <summary>
-				/// The Radar Notification is above the Radar
-				/// </summary>
-				Radar,
-
-				/// <summary>
-				/// The Subtitle Notification displays a Subtitle
-				/// </summary>
-				Subtitle
-			}
-
-			/// <summary>
-			/// Prefered Notification Type set in the INI
-			/// </summary>
-			public static NotificationType PreferedNotificationType { get; set; } = NotificationType.Radar;
-			/// <summary>
-			/// Boolean to Enable and Disable Notifications - Set in the INI
-			/// </summary>
-			public static bool NotificationsEnabled { get; set; } = true;
-			/// <summary>
-			/// Boolean to set if the User wants the Audio - Set in the UI
-			/// </summary>
-			public static bool IsAudioEnabled { get; set; } = true;
 		}
 	}
 }
