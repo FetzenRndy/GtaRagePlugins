@@ -16,6 +16,10 @@ using Rage.Attributes;
 namespace RepairAndWash
 {
 	using System;
+
+	// Rage exposes a Rage.Task class. Which creates a name clash.
+	using DotNetTask = System.Threading.Tasks.Task;
+
 	using Rage;
 
 	using RepairAndWash.Core.Common;
@@ -32,13 +36,14 @@ namespace RepairAndWash
 		[STAThread]
 		public static void Main()
 		{
-			Config.Setup();
 			Audio.Setup();
-			Updater.CheckUpdate();
 			StartPlugin();
-
-			// Welcome Message
 			Game.DisplayNotification("~b~RepairAndWash ~w~V" + Global.Application.CurrentVersion + " Has been loaded ~g~Successfully.");
+
+			DotNetTask.Run(async () =>
+			{
+				await Updater.CheckUpdate();
+			});
 		}
 
 		/// <summary>

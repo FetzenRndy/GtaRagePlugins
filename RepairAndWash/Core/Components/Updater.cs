@@ -1,4 +1,4 @@
-﻿// ****************************** Module Header ****************************** //
+// ****************************** Module Header ****************************** //
 //
 //
 // Last Modified: 01:03:2017 / 01:20
@@ -11,32 +11,37 @@
 
 namespace RepairAndWash.Core.Components
 {
-	using RepairAndWash.Core.Common;
 	using System;
 	using System.Net;
+	using System.Threading.Tasks;
+
+	using RepairAndWash.Core.Common;
 
 	/// <summary>
 	/// Class handling Updates and Downloading Potential Updates
 	/// </summary>
 	internal static class Updater
 	{
-		private static readonly WebClient Web = new WebClient();
+		private const string UPDATE_URL = "https://raw.githubusercontent.com/FetzenRndy/RagePlugins/master/updater/RAWlatestVersion.txt";
 
 		/// <summary>
 		/// Checks for a Update by Downloading the LatestVersion from a maintained GitHub file
 		/// </summary>
-		public static void CheckUpdate()
+		public static async Task CheckUpdate()
 		{
 			string response = null;
 
 			// Try to get the LatestVersion from a Git file
 			try
 			{
-				response = Web.DownloadStringTaskAsync(new Uri("https://raw.githubusercontent.com/FetzenRndy/RagePlugins/master/updater/RAWlatestVersion.txt")).Result;
+				using (var Web = new WebClient())
+				{
+					response = await Web.DownloadStringTaskAsync(new Uri(UPDATE_URL));
+				}
 			}
 			catch (Exception)
 			{
-				// TODO : ErrorHandling in Updater
+				// Ignore
 			}
 
 			// If the Response if NULL or empty the Download wasnt successfull -> Return
