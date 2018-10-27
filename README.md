@@ -2,11 +2,7 @@
 
 # GTA RagePluginHook Plugins . By Fetzen
 
-Here you have some open source plugins for the Rage Plugin hook.
-
-#### What is this all about ?
-
-I made some basic Rage plugins and decided to open source them all of my plugins can be found at a compiled version at the official LSPDFR website.
+This is a collection of plugins I have built for GTA.
 
 #### Suggestions?
 
@@ -14,17 +10,19 @@ If you have a Suggestion please open a issue ticket, I would be more than happy 
 
 #### Problems?
 
-Please open a Issue ticket with the logs of the Game, the used version of the Plugin and if you can a picture of your GTA - lspdfr - Rage and Plugins folder.
+If you are a "User" of the plugin open a discussion on the mod's page.
+Should I not respond to that support-request feel free to open an Issue here.
 
-#### Want to Contribute ? 
+If you are a Developer feel free to open an Issue.
 
-I will be more than Happy if you have a Idea or found a bug you have a solution for and want to contribute the code yourself, just some stuff:
+#### Getting Started Developing
 
-What you will need:
-- A legal copy of GTA (For Testing),
-- The Rage Plugin Hook,
-- Probably LSPDFR,
-- C# knowlege,
-- Visual Studio
+Since the license of the RagePluginHook prohibits the inclusion of the built binary, I can not upload it to github.
+This means if you want to get started developing, you need to download and copy the sdk into the `/sdk/` folder.
 
-To Contribute, you can open a Pull request at any time, and please comment and Test your Code. Thanks.
+Instructions to do so can be found in the `/sdk/` folder.
+
+#### Contributions
+
+If you want to contribute feel free to raise issues and make pull requests.
+Make sure to follow the instructions above.
