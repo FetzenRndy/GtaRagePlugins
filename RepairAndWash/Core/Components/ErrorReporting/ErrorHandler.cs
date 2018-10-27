@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace RepairAndWash.Core.Components.ErrorReporting.Reporters
+namespace RepairAndWash.Core.Components.ErrorReporting
 {
 	public static class ErrorHandler
 	{
@@ -24,12 +24,12 @@ namespace RepairAndWash.Core.Components.ErrorReporting.Reporters
 
 		public static void Report(string message, Exception exception)
 		{
-			InvokeHandlers($"{message} \n\n {FormatException(exception)}");
+			InvokeHandlers($"{message} \n\n{FormatException(exception)}");
 		}
 
 		private static string FormatException(Exception exception)
 		{
-			return $"-- ERROR -- \n {exception.Message}";
+			return $"-- ERROR -- \n{exception.Message}";
 		}
 
 		private static void InvokeHandlers(string message)

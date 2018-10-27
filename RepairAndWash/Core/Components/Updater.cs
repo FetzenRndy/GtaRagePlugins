@@ -16,7 +16,7 @@ namespace RepairAndWash.Core.Components
 	using System.Threading.Tasks;
 
 	using RepairAndWash.Core.Common;
-	using RepairAndWash.Core.Components.ErrorReporting.Reporters;
+	using RepairAndWash.Core.Components.ErrorReporting;
 
 	/// <summary>
 	/// Class handling Updates and Downloading Potential Updates
