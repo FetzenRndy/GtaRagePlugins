@@ -1,4 +1,4 @@
-﻿// ****************************** Module Header ****************************** //
+// ****************************** Module Header ****************************** //
 //
 //
 // Last Modified: 01:03:2017 / 00:14
@@ -15,6 +15,7 @@ using Rage.Attributes;
 
 namespace RepairAndWash
 {
+	using System;
 	using Rage;
 
 	using RepairAndWash.Core.Common;
@@ -28,6 +29,7 @@ namespace RepairAndWash
 		/// <summary>
 		/// Main Entry Point of the Plugin
 		/// </summary>
+		[STAThread]
 		public static void Main()
 		{
 			Config.Setup();
