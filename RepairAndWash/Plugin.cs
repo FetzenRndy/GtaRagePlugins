@@ -24,6 +24,7 @@ namespace RepairAndWash
 
 	using RepairAndWash.Core.Common;
 	using RepairAndWash.Core.Components;
+	using RepairAndWash.Core.Components.ErrorReporting.Reporters;
 
 	/// <summary>
 	/// Main logic and Entry Point of the Plugin
@@ -36,9 +37,12 @@ namespace RepairAndWash
 		[STAThread]
 		public static void Main()
 		{
+			ErrorHandler.RegisterReporter(new IngameMessageReporter());
+
 			Audio.Setup();
 			StartPlugin();
-			Game.DisplayNotification("~b~RepairAndWash ~w~V" + Global.Application.CurrentVersion + " Has been loaded ~g~Successfully.");
+
+			Game.DisplayNotification("~b~RepairAndWash ~w~V" + Global.Application.CurrentVersion + " Has been loaded ~g~Successfully~w.");
 
 			DotNetTask.Run(async () =>
 			{
@@ -100,8 +104,6 @@ namespace RepairAndWash
 				Audio.PlaySound(Global.Sound.Sounds.Wash);
 				Util.DisplayNotificationType("~g~Cleaned your vehicle " + playerVehicleType + "!");
 			}
-
-			// TODO: Test if this is Needed :  WaitForKeydown();
 		}
 
 		/// <summary>

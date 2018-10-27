@@ -1,4 +1,4 @@
-﻿// ****************************** Module Header ****************************** //
+// ****************************** Module Header ****************************** //
 //
 //
 // Last Modified: 28:02:2017 / 15:34
@@ -12,6 +12,7 @@
 namespace RepairAndWash.Core.Components
 {
 	using RepairAndWash.Core.Common;
+	using RepairAndWash.Core.Components.ErrorReporting.Reporters;
 	using System;
 	using System.Media;
 
@@ -30,9 +31,9 @@ namespace RepairAndWash.Core.Components
 				Global.Sound.RepairSound = new SoundPlayer("Plugins/RAW/repair.wav");
 				Global.Sound.WashSound = new SoundPlayer("Plugins/RAW/clean.wav");
 			}
-			catch (Exception)
+			catch (Exception exception)
 			{
-				// TODO : ERROR HANDLING
+				ErrorHandler.Report("Could not load audio files! Check your Installation!", exception);
 			}
 		}
 
@@ -66,9 +67,9 @@ namespace RepairAndWash.Core.Components
 						break;
 				}
 			}
-			catch (Exception)
+			catch (Exception exception)
 			{
-				// TODO : ErrorHandling in Audio.PlaySound
+				ErrorHandler.Report("Could not play Sound!", exception);
 			}
 		}
 	}

@@ -16,6 +16,7 @@ namespace RepairAndWash.Core.Components
 	using System.Threading.Tasks;
 
 	using RepairAndWash.Core.Common;
+	using RepairAndWash.Core.Components.ErrorReporting.Reporters;
 
 	/// <summary>
 	/// Class handling Updates and Downloading Potential Updates
@@ -31,7 +32,6 @@ namespace RepairAndWash.Core.Components
 		{
 			string response = null;
 
-			// Try to get the LatestVersion from a Git file
 			try
 			{
 				using (var Web = new WebClient())
@@ -39,9 +39,9 @@ namespace RepairAndWash.Core.Components
 					response = await Web.DownloadStringTaskAsync(new Uri(UPDATE_URL));
 				}
 			}
-			catch (Exception)
+			catch (Exception exception)
 			{
-				// Ignore
+				ErrorHandler.Report("Could not contact update service!", exception);
 			}
 
 			// If the Response if NULL or empty the Download wasnt successfull -> Return

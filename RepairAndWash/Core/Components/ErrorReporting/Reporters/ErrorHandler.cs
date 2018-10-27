@@ -19,7 +19,17 @@ namespace RepairAndWash.Core.Components.ErrorReporting.Reporters
 
 		public static void Report(Exception exception)
 		{
-			InvokeHandlers(exception.Message);
+			InvokeHandlers(FormatException(exception));
+		}
+
+		public static void Report(string message, Exception exception)
+		{
+			InvokeHandlers($"{message} \n\n {FormatException(exception)}");
+		}
+
+		private static string FormatException(Exception exception)
+		{
+			return $"-- ERROR -- \n {exception.Message}";
 		}
 
 		private static void InvokeHandlers(string message)
