@@ -53,7 +53,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Core\Components\Audio.cs" />
     <Compile Include="Core\Components\ErrorReporting\Reporters\IErrorReporter.cs" />
     <Compile Include="Core\Components\ErrorReporting\ErrorHandler.cs" />
     <Compile Include="Core\Components\ErrorReporting\Reporters\IngameMessageReporter.cs" />

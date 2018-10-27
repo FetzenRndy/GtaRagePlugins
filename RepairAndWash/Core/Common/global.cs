@@ -120,41 +120,5 @@ namespace RepairAndWash.Core.Common
 			/// </summary>
 			public static bool IsAudioEnabled { get; set; } = true;
 		}
-
-		/// <summary>
-		/// Sound Settings and Fields
-		/// </summary>
-		public static class Sound
-		{
-			/// <summary>
-			/// Enum containing all Sounds
-			/// </summary>
-			public enum Sounds
-			{
-				/// <summary>
-				/// Repair Sound
-				/// </summary>
-				Repair,
-
-				/// <summary>
-				/// Wash Sound
-				/// </summary>
-				Wash,
-
-				/// <summary>
-				/// Repair and Wash Soudn
-				/// </summary>
-				RepairAndWash
-			}
-
-			/// <summary>
-			/// SoundPlayer with the Wash sound
-			/// </summary>
-			public static SoundPlayer WashSound { get; set; }
-			/// <summary>
-			/// SoundPlayer with the Repair Sound
-			/// </summary>
-			public static SoundPlayer RepairSound { get; set; }
-		}
 	}
 }
