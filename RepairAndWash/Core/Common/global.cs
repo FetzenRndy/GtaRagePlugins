@@ -11,7 +11,6 @@
 
 namespace RepairAndWash.Core.Common
 {
-	using System.Media;
 	using System.Windows.Forms;
 
 	internal static class Global
@@ -56,10 +55,6 @@ namespace RepairAndWash.Core.Common
 			/// Latest Version of the Plugin - Gets set by Downloading the version file forom Git
 			/// </summary>
 			public static float LatestVersion { get; set; }
-			/// <summary>
-			/// Bool to find out if the Plugin is starting for the First Time
-			/// </summary>
-			public static bool IsFirstStart { get; set; }
 		}
 
 		/// <summary>
