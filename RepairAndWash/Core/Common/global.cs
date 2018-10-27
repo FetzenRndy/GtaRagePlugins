@@ -1,4 +1,4 @@
-﻿// ****************************** Module Header ****************************** //
+// ****************************** Module Header ****************************** //
 //
 //
 // Last Modified: 01:03:2017 / 00:07
@@ -110,15 +110,15 @@ namespace RepairAndWash.Core.Common
 			/// <summary>
 			/// Prefered Notification Type set in the INI
 			/// </summary>
-			public static NotificationType PreferedNotificationType { get; set; }
+			public static NotificationType PreferedNotificationType { get; set; } = NotificationType.Radar;
 			/// <summary>
 			/// Boolean to Enable and Disable Notifications - Set in the INI
 			/// </summary>
-			public static bool IsNotificationEnabled { get; set; }
+			public static bool NotificationsEnabled { get; set; } = true;
 			/// <summary>
 			/// Boolean to set if the User wants the Audio - Set in the UI
 			/// </summary>
-			public static bool IsAudioEnabled { get; set; }
+			public static bool IsAudioEnabled { get; set; } = true;
 		}
 
 		/// <summary>
